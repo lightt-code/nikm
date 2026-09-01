@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#12051f" />
+  <title>LIGHT — Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true"></div>
+
+  <main class="page">
+    <nav class="nav reveal">
+      <div class="brand">LIGHT<span>.</span></div>
+      <button class="music-toggle" id="musicToggle" aria-label="Play music">
+        <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span id="musicText">PLAY MUSIC</span>
+      </button>
+    </nav>
+
+    <section class="hero">
+      <div class="copy">
+        <p class="eyebrow reveal delay-1">PERSONAL PORTFOLIO / 2026</p>
+        <h1 class="reveal delay-2">LIGHT<span>.</span></h1>
+        <p class="intro reveal delay-3">
+          Developer, creator and builder of digital projects.
+          Turning ideas into clean, working experiences.
+        </p>
+
+        <div class="stats reveal delay-4">
+          <div><strong>5+</strong><span>YEARS CODING</span></div>
+          <div><strong>2000+</strong><span>CLIENTS</span></div>
+          <div><strong>95+%</strong><span>SUCCESSFUL ORDERS</span></div>
+        </div>
+      </div>
+
+      <div class="visual reveal delay-2" aria-label="Decorative illustration">
+        <div class="orbit orbit-a"></div>
+        <div class="orbit orbit-b"></div>
+        <div class="moon"></div>
+        <div class="character">
+          <img class="character-image" src="assets/girl.png" alt="Illustration" />
+        </div>
+        <div class="visual-caption">BUILDING<br/>IN THE DARK.</div>
+      </div>
+    </section>
+
+    <section class="links-section reveal delay-4">
+      <a class="project-card" href="https://t.me/clozle" target="_blank" rel="noopener">
+        <span class="card-number">01</span>
+        <div><h2>Telegram</h2><p>@clozle</p></div>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="project-card" href="https://www.tiktok.com/@cmexrz" target="_blank" rel="noopener">
+        <span class="card-number">02</span>
+        <div><h2>TikTok</h2><p>@cmexrz</p></div>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="project-card" href="https://t.me/LightStarRobot" target="_blank" rel="noopener">
+        <span class="card-number">03</span>
+        <div><h2>Stars Bot</h2><p>@LightStarRobot</p></div>
+        <span class="arrow">↗</span>
+      </a>
+      <a class="project-card" href="https://t.me/notMyProblem15" target="_blank" rel="noopener">
+        <span class="card-number">04</span>
+        <div><h2>My Projects</h2><p>Explore my work</p></div>
+        <span class="arrow">↗</span>
+      </a>
+    </section>
+
+    <section class="portfolio-section reveal delay-4" id="portfolio" aria-labelledby="portfolio-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">WHAT I BUILD</p>
+          <h2 id="portfolio-title">Мои работы<span>.</span></h2>
+        </div>
+        <p class="section-note">Плагины, сайты, дизайн и другие цифровые решения.</p>
+      </div>
+
+      <div class="portfolio-slider" aria-roledescription="carousel" aria-label="Мои услуги">
+        <div class="portfolio-track" id="portfolioTrack">
+          <article class="portfolio-slide is-active" aria-hidden="false">
+            <div class="service-visual service-plugins"><span>01</span><i>PLUGINS</i></div>
+            <div class="service-copy">
+              <p class="card-number">SERVICE / 01</p>
+              <h3>Плагины</h3>
+              <p>Разработка полезных плагинов и расширений под задачи проекта.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-slide" aria-hidden="true">
+            <div class="service-visual service-sites"><span>02</span><i>WEB</i></div>
+            <div class="service-copy">
+              <p class="card-number">SERVICE / 02</p>
+              <h3>Разработка сайтов</h3>
+              <p>Современные адаптивные сайты с аккуратной версткой и анимациями.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-slide" aria-hidden="true">
+            <div class="service-visual service-design"><span>03</span><i>DESIGN</i></div>
+            <div class="service-copy">
+              <p class="card-number">SERVICE / 03</p>
+              <h3>Дизайн</h3>
+              <p>Визуальная концепция, интерфейсы и оформление цифровых продуктов.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-slide" aria-hidden="true">
+            <div class="service-visual service-more"><span>04</span><i>MORE</i></div>
+            <div class="service-copy">
+              <p class="card-number">SERVICE / 04</p>
+              <h3>Автоматизация и прочее</h3>
+              <p>Боты, интеграции, автоматизация и другие решения под конкретную задачу.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="portfolio-controls">
+        <button class="slider-button" id="portfolioPrev" type="button" aria-label="Предыдущая работа">←</button>
+        <div class="slider-dots" id="portfolioDots" aria-label="Выбор работы"></div>
+        <button class="slider-button" id="portfolioNext" type="button" aria-label="Следующая работа">→</button>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 LIGHT. ALL RIGHTS RESERVED.</span>
+      <span class="status"><i></i> AVAILABLE ONLINE</span>
+    </footer>
+  </main>
+
+  <audio id="bgMusic" loop preload="metadata">
+    <source src="./assets/music.mp3" type="audio/mpeg" />
+  </audio>
+  <script src="script.js"></script>
+</body>
+</html>
