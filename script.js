@@ -82,8 +82,8 @@ function normalizeAngle(angle) {
   return ((angle + 180) % 360 + 360) % 360 - 180;
 }
 function renderCard() {
-  rotX += (targetX - rotX) * 0.14;
-  rotY += (targetY - rotY) * 0.14;
+  rotX += (targetX - rotX) * 0.09;
+  rotY += (targetY - rotY) * 0.09;
   businessCard.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   requestAnimationFrame(renderCard);
 }
@@ -106,8 +106,8 @@ cardStage.addEventListener('pointermove', (event) => {
   if (Math.abs(dx) + Math.abs(dy) > 1) moved = true;
   lastX = event.clientX;
   lastY = event.clientY;
-  targetY = normalizeAngle(targetY + dx * 0.95);
-  targetX = clamp(targetX - dy * 0.38, -62, 62);
+  targetY = normalizeAngle(targetY + dx * 0.5);
+  targetX = clamp(targetX - dy * 0.22, -62, 62);
 });
 
 function stopDrag(event) {
@@ -185,3 +185,60 @@ if (slides.length) {
   prevButton.addEventListener('click', () => showSlide(currentSlide - 1, true));
   nextButton.addEventListener('click', () => showSlide(currentSlide + 1, true));
 }
+
+// Portfolio detail modal.
+const portfolioModal = document.getElementById('portfolioModal');
+const modalImage = document.getElementById('modalImage');
+const modalNumber = document.getElementById('modalNumber');
+const modalTitle = document.getElementById('modalTitle');
+const modalText = document.getElementById('modalText');
+const modalList = document.getElementById('modalList');
+let lastFocusedSlide = null;
+
+function openPortfolioModal(slide) {
+  const img = slide.querySelector('.service-visual img');
+  modalImage.src = img.src;
+  modalImage.alt = img.alt;
+  modalNumber.textContent = slide.querySelector('.card-number').textContent;
+  modalTitle.textContent = slide.querySelector('h3').textContent;
+  modalText.textContent = slide.dataset.detail || '';
+  modalList.innerHTML = '';
+  (slide.dataset.points || '').split(';').map((point) => point.trim()).filter(Boolean).forEach((point) => {
+    const li = document.createElement('li');
+    li.textContent = point;
+    modalList.appendChild(li);
+  });
+  lastFocusedSlide = slide;
+  portfolioModal.classList.add('is-open');
+  portfolioModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('no-scroll');
+  clearInterval(portfolioTimer);
+  portfolioModal.querySelector('.portfolio-modal-close').focus();
+}
+
+function closePortfolioModal() {
+  if (!portfolioModal.classList.contains('is-open')) return;
+  portfolioModal.classList.remove('is-open');
+  portfolioModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('no-scroll');
+  restartPortfolioTimer();
+  if (lastFocusedSlide) lastFocusedSlide.focus();
+}
+
+slides.forEach((slide) => {
+  slide.addEventListener('click', () => openPortfolioModal(slide));
+  slide.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openPortfolioModal(slide);
+    }
+  });
+});
+
+portfolioModal.querySelectorAll('[data-modal-close]').forEach((el) => {
+  el.addEventListener('click', closePortfolioModal);
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closePortfolioModal();
+});
