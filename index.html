@@ -107,39 +107,51 @@
         <p class="section-note">Плагины, сайты, дизайн и другие цифровые решения.</p>
       </div>
 
-      <div class="portfolio-slider" aria-roledescription="carousel" aria-label="Мои работы">
-        <div class="portfolio-track" id="portfolioTrack">
-          <article class="portfolio-slide is-active" aria-hidden="false" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Подробнее: Плагины"
-            data-detail="Пишу лёгкие плагины и модули под конкретные задачи: интеграции с внешними API, автоматизация внутри ботов и мини-приложений. Продумываю логику так, чтобы плагин было просто включить, настроить и забыть — он просто работает."
-            data-points="Интеграция с внешними API и сервисами;Гибкие настройки без правки кода;Лимиты, таймауты и защита от сбоев из коробки">
-            <div class="service-visual"><img src="plugins.jpeg" alt="Пример Plugins" loading="lazy" decoding="async" width="1060" height="500"><span>01</span><i>PLUGINS</i></div>
-            <div class="service-copy"><p class="card-number">WORK / 01</p><h3>Плагины</h3><p>Разработка полезных плагинов и расширений под задачи проекта.</p><span class="slide-more" aria-hidden="true">Подробнее <i>→</i></span></div>
-          </article>
-          <article class="portfolio-slide" aria-hidden="true" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Подробнее: Разработка сайтов"
-            data-detail="Собираю адаптивные сайты и лендинги на чистом HTML/CSS/JS без лишних зависимостей — быстрая загрузка, плавные анимации и аккуратная вёрстка на любом экране."
-            data-points="Адаптивная вёрстка под любые устройства;Анимации и интерактив без тяжёлых библиотек;Оптимизация скорости загрузки">
-            <div class="service-visual"><img src="web.jpeg" alt="Пример WEB" loading="lazy" decoding="async" width="1060" height="500"><span>02</span><i>WEB</i></div>
-            <div class="service-copy"><p class="card-number">WORK / 02</p><h3>Разработка сайтов</h3><p>Современные адаптивные сайты с аккуратной версткой и анимациями.</p><span class="slide-more" aria-hidden="true">Подробнее <i>→</i></span></div>
-          </article>
-          <article class="portfolio-slide" aria-hidden="true" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Подробнее: Дизайн"
-            data-detail="Разрабатываю визуальную айдентику и графику: обложки, баннеры, 3D- и глитч-эффекты, оформление интерфейсов — так, чтобы продукт цеплял с первого взгляда."
-            data-points="Фирменный стиль и визуальная концепция;Графика для соцсетей и обложек;UI-элементы под общий стиль проекта">
-            <div class="service-visual"><img src="design.jpeg" alt="Пример DESIGN" loading="lazy" decoding="async" width="1060" height="500"><span>03</span><i>DESIGN</i></div>
-            <div class="service-copy"><p class="card-number">WORK / 03</p><h3>Дизайн</h3><p>Визуальная концепция, интерфейсы и оформление цифровых продуктов.</p><span class="slide-more" aria-hidden="true">Подробнее <i>→</i></span></div>
-          </article>
-          <article class="portfolio-slide" aria-hidden="true" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Подробнее: Автоматизация и прочее"
-            data-detail="Боты, интеграции и автоматизация рутинных процессов — от Telegram-ботов до связок между сервисами, которые экономят время и убирают ручную работу."
-            data-points="Telegram-боты под задачи бизнеса;Связки и автоматизация между сервисами;Поддержка и доработка после запуска">
-            <div class="service-visual"><img src="more.jpeg" alt="Пример MORE" loading="lazy" decoding="async" width="1060" height="500"><span>04</span><i>MORE</i></div>
-            <div class="service-copy"><p class="card-number">WORK / 04</p><h3>Автоматизация и прочее</h3><p>Боты, интеграции, автоматизация и другие решения под конкретную задачу.</p><span class="slide-more" aria-hidden="true">Подробнее <i>→</i></span></div>
-          </article>
-        </div>
-      </div>
-
-      <div class="portfolio-controls">
-        <button class="slider-button" id="portfolioPrev" type="button" aria-label="Предыдущая работа">←</button>
-        <div class="slider-dots" id="portfolioDots" aria-label="Выбор работы"></div>
-        <button class="slider-button" id="portfolioNext" type="button" aria-label="Следующая работа">→</button>
+      <div class="portfolio-grid" id="portfolioGrid">
+        <article class="portfolio-card"
+          data-title="Плагины"
+          data-detail="Пишу лёгкие плагины и модули под конкретные задачи: интеграции с внешними API, автоматизация внутри ботов и мини-приложений. Продумываю логику так, чтобы плагин было просто включить, настроить и забыть — он просто работает."
+          data-points="Интеграция с внешними API и сервисами;Гибкие настройки без правки кода;Лимиты, таймауты и защита от сбоев из коробки">
+          <div class="portfolio-card-visual"><img src="plugins.jpeg" alt="Пример Plugins" loading="lazy" decoding="async" width="1060" height="500"><span>01</span></div>
+          <div class="portfolio-card-copy">
+            <h3>Плагины</h3>
+            <p>Разработка полезных плагинов и расширений под задачи проекта.</p>
+            <button class="btn-shine" type="button">Подробнее</button>
+          </div>
+        </article>
+        <article class="portfolio-card"
+          data-title="Разработка сайтов"
+          data-detail="Собираю адаптивные сайты и лендинги на чистом HTML/CSS/JS без лишних зависимостей — быстрая загрузка, плавные анимации и аккуратная вёрстка на любом экране."
+          data-points="Адаптивная вёрстка под любые устройства;Анимации и интерактив без тяжёлых библиотек;Оптимизация скорости загрузки">
+          <div class="portfolio-card-visual"><img src="web.jpeg" alt="Пример WEB" loading="lazy" decoding="async" width="1060" height="500"><span>02</span></div>
+          <div class="portfolio-card-copy">
+            <h3>Разработка сайтов</h3>
+            <p>Современные адаптивные сайты с аккуратной версткой и анимациями.</p>
+            <button class="btn-shine" type="button">Подробнее</button>
+          </div>
+        </article>
+        <article class="portfolio-card"
+          data-title="Дизайн"
+          data-detail="Разрабатываю визуальную айдентику и графику: обложки, баннеры, 3D- и глитч-эффекты, оформление интерфейсов — так, чтобы продукт цеплял с первого взгляда."
+          data-points="Фирменный стиль и визуальная концепция;Графика для соцсетей и обложек;UI-элементы под общий стиль проекта">
+          <div class="portfolio-card-visual"><img src="design.jpeg" alt="Пример DESIGN" loading="lazy" decoding="async" width="1060" height="500"><span>03</span></div>
+          <div class="portfolio-card-copy">
+            <h3>Дизайн</h3>
+            <p>Визуальная концепция, интерфейсы и оформление цифровых продуктов.</p>
+            <button class="btn-shine" type="button">Подробнее</button>
+          </div>
+        </article>
+        <article class="portfolio-card"
+          data-title="Автоматизация и прочее"
+          data-detail="Боты, интеграции и автоматизация рутинных процессов — от Telegram-ботов до связок между сервисами, которые экономят время и убирают ручную работу."
+          data-points="Telegram-боты под задачи бизнеса;Связки и автоматизация между сервисами;Поддержка и доработка после запуска">
+          <div class="portfolio-card-visual"><img src="more.jpeg" alt="Пример MORE" loading="lazy" decoding="async" width="1060" height="500"><span>04</span></div>
+          <div class="portfolio-card-copy">
+            <h3>Автоматизация и прочее</h3>
+            <p>Боты, интеграции, автоматизация и другие решения под конкретную задачу.</p>
+            <button class="btn-shine" type="button">Подробнее</button>
+          </div>
+        </article>
       </div>
     </section>
 

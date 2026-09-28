@@ -139,80 +139,34 @@ businessCard.addEventListener('keydown', (event) => {
   if (event.key === 'Home') { targetX = -8; targetY = 16; }
 });
 
-// Portfolio carousel.
-const slides = Array.from(document.querySelectorAll('.portfolio-slide'));
-const dots = document.getElementById('portfolioDots');
-const prevButton = document.getElementById('portfolioPrev');
-const nextButton = document.getElementById('portfolioNext');
-let currentSlide = 0;
-let portfolioTimer;
-const portfolioInterval = 4800;
-
-function renderDots() {
-  slides.forEach((_, index) => {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.className = 'slider-dot';
-    dot.setAttribute('aria-label', `Показать работу ${index + 1}`);
-    dot.addEventListener('click', () => showSlide(index, true));
-    dots.appendChild(dot);
-  });
-}
-
-function showSlide(index, resetTimer = false) {
-  currentSlide = (index + slides.length) % slides.length;
-  slides.forEach((slide, slideIndex) => {
-    const active = slideIndex === currentSlide;
-    slide.classList.toggle('is-active', active);
-    slide.setAttribute('aria-hidden', String(!active));
-  });
-  Array.from(dots.children).forEach((dot, dotIndex) => {
-    dot.classList.toggle('is-active', dotIndex === currentSlide);
-    dot.setAttribute('aria-current', dotIndex === currentSlide ? 'true' : 'false');
-  });
-  if (resetTimer) restartPortfolioTimer();
-}
-
-function restartPortfolioTimer() {
-  clearInterval(portfolioTimer);
-  portfolioTimer = setInterval(() => showSlide(currentSlide + 1), portfolioInterval);
-}
-
-if (slides.length) {
-  renderDots();
-  showSlide(0);
-  restartPortfolioTimer();
-  prevButton.addEventListener('click', () => showSlide(currentSlide - 1, true));
-  nextButton.addEventListener('click', () => showSlide(currentSlide + 1, true));
-}
-
-// Portfolio detail modal.
+// Portfolio grid + detail modal.
+const portfolioCards = Array.from(document.querySelectorAll('.portfolio-card'));
 const portfolioModal = document.getElementById('portfolioModal');
 const modalImage = document.getElementById('modalImage');
 const modalNumber = document.getElementById('modalNumber');
 const modalTitle = document.getElementById('modalTitle');
 const modalText = document.getElementById('modalText');
 const modalList = document.getElementById('modalList');
-let lastFocusedSlide = null;
+let lastFocusedTrigger = null;
 
-function openPortfolioModal(slide) {
-  const img = slide.querySelector('.service-visual img');
+function openPortfolioModal(card, trigger) {
+  const img = card.querySelector('.portfolio-card-visual img');
+  const index = portfolioCards.indexOf(card);
   modalImage.src = img.src;
   modalImage.alt = img.alt;
-  modalNumber.textContent = slide.querySelector('.card-number').textContent;
-  modalTitle.textContent = slide.querySelector('h3').textContent;
-  modalText.textContent = slide.dataset.detail || '';
+  modalNumber.textContent = `WORK / ${String(index + 1).padStart(2, '0')}`;
+  modalTitle.textContent = card.dataset.title || '';
+  modalText.textContent = card.dataset.detail || '';
   modalList.innerHTML = '';
-  (slide.dataset.points || '').split(';').map((point) => point.trim()).filter(Boolean).forEach((point) => {
+  (card.dataset.points || '').split(';').map((point) => point.trim()).filter(Boolean).forEach((point) => {
     const li = document.createElement('li');
     li.textContent = point;
     modalList.appendChild(li);
   });
-  lastFocusedSlide = slide;
+  lastFocusedTrigger = trigger;
   portfolioModal.classList.add('is-open');
   portfolioModal.setAttribute('aria-hidden', 'false');
   document.body.classList.add('no-scroll');
-  clearInterval(portfolioTimer);
   portfolioModal.querySelector('.portfolio-modal-close').focus();
 }
 
@@ -221,18 +175,12 @@ function closePortfolioModal() {
   portfolioModal.classList.remove('is-open');
   portfolioModal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('no-scroll');
-  restartPortfolioTimer();
-  if (lastFocusedSlide) lastFocusedSlide.focus();
+  if (lastFocusedTrigger) lastFocusedTrigger.focus();
 }
 
-slides.forEach((slide) => {
-  slide.addEventListener('click', () => openPortfolioModal(slide));
-  slide.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      openPortfolioModal(slide);
-    }
-  });
+portfolioCards.forEach((card) => {
+  const trigger = card.querySelector('.btn-shine');
+  if (trigger) trigger.addEventListener('click', () => openPortfolioModal(card, trigger));
 });
 
 portfolioModal.querySelectorAll('[data-modal-close]').forEach((el) => {
