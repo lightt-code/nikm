@@ -67,18 +67,10 @@ audio.addEventListener('ended', () => {
 // Interactive 3D money stack — one pointer system for mouse, pen and touch.
 const cardStage = document.getElementById('cardStage');
 const moneyStack = document.getElementById('moneyStack');
-const moneyLayers = moneyStack.querySelector('.money-layers');
-// Thickness of the stack: a few copies of the photo between the front and back faces.
-for (let i = 0; i < 30; i++) {
-  const layer = document.createElement('img');
-  layer.src = 'money.png';
-  layer.alt = '';
-  layer.draggable = false;
-  layer.style.transform = `translateZ(${(-34 + i * (68 / 29)).toFixed(2)}px)`;
-  moneyLayers.appendChild(layer);
-}
-const HOME_X = -12;
-const HOME_Y = 18;
+const HOME_X = -18;
+const HOME_Y = 28;
+let velY = 0;
+let velX = 0;
 let rotX = HOME_X;
 let rotY = HOME_Y;
 let targetX = rotX;
@@ -87,15 +79,25 @@ let dragging = false;
 let lastX = 0;
 let lastY = 0;
 let moved = false;
+let lastMoveT = 0;
 
 function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
 function normalizeAngle(angle) {
   return ((angle + 180) % 360 + 360) % 360 - 180;
 }
+function shortestDelta(from, to) { return normalizeAngle(to - from); }
 function renderCard() {
-  rotX += (targetX - rotX) * 0.09;
-  rotY += (targetY - rotY) * 0.09;
-  moneyStack.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  if (!dragging) {
+    targetY = normalizeAngle(targetY + velY);
+    targetX = clamp(targetX + velX, -75, 75);
+    velY *= 0.94;
+    velX *= 0.9;
+    if (Math.abs(velY) < 0.02) velY = 0;
+    if (Math.abs(velX) < 0.02) velX = 0;
+  }
+  rotX += (targetX - rotX) * 0.14;
+  rotY += shortestDelta(rotY, targetY) * 0.14;
+  moneyStack.style.transform = `scale(var(--ms)) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   requestAnimationFrame(renderCard);
 }
 renderCard();
@@ -104,6 +106,8 @@ cardStage.addEventListener('pointerdown', (event) => {
   if (event.pointerType === 'mouse' && event.button !== 0) return;
   dragging = true;
   moved = false;
+  velX = 0;
+  velY = 0;
   lastX = event.clientX;
   lastY = event.clientY;
   cardStage.classList.add('is-dragging');
@@ -117,13 +121,17 @@ cardStage.addEventListener('pointermove', (event) => {
   if (Math.abs(dx) + Math.abs(dy) > 1) moved = true;
   lastX = event.clientX;
   lastY = event.clientY;
-  targetY = normalizeAngle(targetY + dx * 0.5);
-  targetX = clamp(targetX - dy * 0.22, -62, 62);
+  targetY = normalizeAngle(targetY + dx * 0.55);
+  targetX = clamp(targetX - dy * 0.3, -75, 75);
+  lastMoveT = performance.now();
+  velY = dx * 0.35;
+  velX = -dy * 0.12;
 });
 
 function stopDrag(event) {
   if (!dragging) return;
   dragging = false;
+  if (performance.now() - lastMoveT > 90) { velX = 0; velY = 0; }
   cardStage.classList.remove('is-dragging');
   try { cardStage.releasePointerCapture(event.pointerId); } catch (_) {}
 }
@@ -140,8 +148,8 @@ moneyStack.addEventListener('keydown', (event) => {
   const step = event.shiftKey ? 12 : 6;
   if (event.key === 'ArrowLeft') targetY = normalizeAngle(targetY - step);
   if (event.key === 'ArrowRight') targetY = normalizeAngle(targetY + step);
-  if (event.key === 'ArrowUp') targetX = clamp(targetX - step, -62, 62);
-  if (event.key === 'ArrowDown') targetX = clamp(targetX + step, -62, 62);
+  if (event.key === 'ArrowUp') targetX = clamp(targetX - step, -75, 75);
+  if (event.key === 'ArrowDown') targetX = clamp(targetX + step, -75, 75);
   if (event.key === 'Home') { targetX = HOME_X; targetY = HOME_Y; }
 });
 
