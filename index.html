@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#100615" />
+  <meta name="theme-color" content="#06101c" />
   <meta name="description" content="LIGHT — personal portfolio, digital projects, plugins, web and design." />
   <title>LIGHT — Portfolio</title>
   <link rel="stylesheet" href="style.css" />
@@ -37,37 +37,16 @@
         </div>
       </div>
 
-      <div class="visual reveal delay-2" aria-label="Интерактивная 3D визитка CEO">
+      <div class="visual reveal delay-2" aria-label="Интерактивная 3D пачка денег">
         <div class="orbit orbit-a"></div>
         <div class="orbit orbit-b"></div>
         <div class="moon"></div>
         <div class="hero-card-stage" id="cardStage">
           <div class="card-glow" aria-hidden="true"></div>
-          <div class="business-card-3d" id="businessCard" aria-label="Интерактивная 3D визитка CEO" tabindex="0">
-            <div class="card-solid" aria-hidden="true"></div>
-            <div class="card-edge edge-left" aria-hidden="true"></div>
-            <div class="card-edge edge-right" aria-hidden="true"></div>
-            <div class="card-edge edge-top" aria-hidden="true"></div>
-            <div class="card-edge edge-bottom" aria-hidden="true"></div>
-
-            <div class="card-face card-front">
-              <div class="front-quote">I'm CEO, Bitch.</div>
-              <div class="front-info">
-                <div class="front-name">light clozle</div>
-                <div class="front-company"><strong>Light</strong> CORPORATE HEADQUARTERS</div>
-                <div>3156 university avenue, palo alto, ca 94301-1605</div>
-                <div>phone: 999-000-9900</div>
-              </div>
-              <div class="front-stripe"></div>
-              <div class="paper-noise"></div>
-            </div>
-
-            <div class="card-face card-back">
-              <div class="back-texture"></div>
-              <div class="back-brand">LIGHT COMPANY</div>
-              <div class="back-shine"></div>
-              <div class="back-bevel"></div>
-            </div>
+          <div class="money-stack" id="moneyStack" aria-label="Интерактивная 3D пачка денег" tabindex="0">
+            <div class="money-layers" aria-hidden="true"></div>
+            <img class="money-face money-front" src="money.png" alt="Пачка денег" width="551" height="292" draggable="false">
+            <img class="money-face money-back" src="money.png" alt="" aria-hidden="true" width="551" height="292" draggable="false">
           </div>
         </div>
         <div class="hero-card-hint"><span class="drag-dot"></span> DRAG TO ROTATE</div>
@@ -81,9 +60,9 @@
         <div><h2>Telegram</h2><p>@clozle</p></div>
         <span class="arrow">↗</span>
       </a>
-      <a class="project-card" href="https://www.tiktok.com/@cmex.tg" target="_blank" rel="noopener">
+      <a class="project-card" href="https://www.instagram.com/light.yeep" target="_blank" rel="noopener">
         <span class="card-number">02</span>
-        <div><h2>TikTok</h2><p>@cmex.tg</p></div>
+        <div><h2>Instagram</h2><p>@light.yeep</p></div>
         <span class="arrow">↗</span>
       </a>
       <a class="project-card" href="https://t.me/LightStarRobot" target="_blank" rel="noopener">
@@ -112,7 +91,7 @@
           data-title="Плагины"
           data-detail="Пишу лёгкие плагины и модули под конкретные задачи: интеграции с внешними API, автоматизация внутри ботов и мини-приложений. Продумываю логику так, чтобы плагин было просто включить, настроить и забыть — он просто работает."
           data-points="Интеграция с внешними API и сервисами;Гибкие настройки без правки кода;Лимиты, таймауты и защита от сбоев из коробки">
-          <div class="portfolio-card-visual"><img src="plugins.jpeg" alt="Пример Plugins" loading="lazy" decoding="async" width="1060" height="500"><span>01</span></div>
+          <div class="portfolio-card-visual"><img src="plugins.jpeg" alt="Пример Plugins" loading="lazy" decoding="async" width="1280" height="733"><span>01</span></div>
           <div class="portfolio-card-copy">
             <h3>Плагины</h3>
             <p>Разработка полезных плагинов и расширений под задачи проекта.</p>
@@ -123,7 +102,7 @@
           data-title="Разработка сайтов"
           data-detail="Собираю адаптивные сайты и лендинги на чистом HTML/CSS/JS без лишних зависимостей — быстрая загрузка, плавные анимации и аккуратная вёрстка на любом экране."
           data-points="Адаптивная вёрстка под любые устройства;Анимации и интерактив без тяжёлых библиотек;Оптимизация скорости загрузки">
-          <div class="portfolio-card-visual"><img src="web.jpeg" alt="Пример WEB" loading="lazy" decoding="async" width="1060" height="500"><span>02</span></div>
+          <div class="portfolio-card-visual"><img src="web.jpeg" alt="Пример WEB" loading="lazy" decoding="async" width="1280" height="733"><span>02</span></div>
           <div class="portfolio-card-copy">
             <h3>Разработка сайтов</h3>
             <p>Современные адаптивные сайты с аккуратной версткой и анимациями.</p>
@@ -134,7 +113,7 @@
           data-title="Дизайн"
           data-detail="Разрабатываю визуальную айдентику и графику: обложки, баннеры, 3D- и глитч-эффекты, оформление интерфейсов — так, чтобы продукт цеплял с первого взгляда."
           data-points="Фирменный стиль и визуальная концепция;Графика для соцсетей и обложек;UI-элементы под общий стиль проекта">
-          <div class="portfolio-card-visual"><img src="design.jpeg" alt="Пример DESIGN" loading="lazy" decoding="async" width="1060" height="500"><span>03</span></div>
+          <div class="portfolio-card-visual"><img src="design.jpeg" alt="Пример DESIGN" loading="lazy" decoding="async" width="1280" height="733"><span>03</span></div>
           <div class="portfolio-card-copy">
             <h3>Дизайн</h3>
             <p>Визуальная концепция, интерфейсы и оформление цифровых продуктов.</p>
@@ -145,7 +124,7 @@
           data-title="Автоматизация и прочее"
           data-detail="Боты, интеграции и автоматизация рутинных процессов — от Telegram-ботов до связок между сервисами, которые экономят время и убирают ручную работу."
           data-points="Telegram-боты под задачи бизнеса;Связки и автоматизация между сервисами;Поддержка и доработка после запуска">
-          <div class="portfolio-card-visual"><img src="more.jpeg" alt="Пример MORE" loading="lazy" decoding="async" width="1060" height="500"><span>04</span></div>
+          <div class="portfolio-card-visual"><img src="more.jpeg" alt="Пример MORE" loading="lazy" decoding="async" width="1280" height="733"><span>04</span></div>
           <div class="portfolio-card-copy">
             <h3>Автоматизация и прочее</h3>
             <p>Боты, интеграции, автоматизация и другие решения под конкретную задачу.</p>

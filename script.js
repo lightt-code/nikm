@@ -26,7 +26,7 @@ function draw() {
     if (p.y < -2) { p.y = innerHeight + 2; p.x = Math.random() * innerWidth; }
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(220,200,255,${p.a})`;
+    ctx.fillStyle = `rgba(190,228,255,${p.a})`;
     ctx.fill();
   }
   requestAnimationFrame(draw);
@@ -64,12 +64,23 @@ audio.addEventListener('ended', () => {
   musicButton.setAttribute('aria-label', 'Play music');
 });
 
-// Interactive 3D business card — one pointer system for mouse, pen and touch.
+// Interactive 3D money stack — one pointer system for mouse, pen and touch.
 const cardStage = document.getElementById('cardStage');
-const businessCard = document.getElementById('businessCard');
-const cardReset = document.getElementById('cardReset');
-let rotX = -8;
-let rotY = 16;
+const moneyStack = document.getElementById('moneyStack');
+const moneyLayers = moneyStack.querySelector('.money-layers');
+// Thickness of the stack: a few copies of the photo between the front and back faces.
+for (let i = 0; i < 30; i++) {
+  const layer = document.createElement('img');
+  layer.src = 'money.png';
+  layer.alt = '';
+  layer.draggable = false;
+  layer.style.transform = `translateZ(${(-34 + i * (68 / 29)).toFixed(2)}px)`;
+  moneyLayers.appendChild(layer);
+}
+const HOME_X = -12;
+const HOME_Y = 18;
+let rotX = HOME_X;
+let rotY = HOME_Y;
 let targetX = rotX;
 let targetY = rotY;
 let dragging = false;
@@ -84,7 +95,7 @@ function normalizeAngle(angle) {
 function renderCard() {
   rotX += (targetX - rotX) * 0.09;
   rotY += (targetY - rotY) * 0.09;
-  businessCard.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  moneyStack.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   requestAnimationFrame(renderCard);
 }
 renderCard();
@@ -123,20 +134,15 @@ cardStage.addEventListener('lostpointercapture', () => {
   cardStage.classList.remove('is-dragging');
 });
 
-if (cardReset) {
-  cardReset.addEventListener('click', () => {
-    targetX = -8;
-    targetY = 16;
-  });
-}
+cardStage.addEventListener('dblclick', () => { targetX = HOME_X; targetY = HOME_Y; });
 
-businessCard.addEventListener('keydown', (event) => {
+moneyStack.addEventListener('keydown', (event) => {
   const step = event.shiftKey ? 12 : 6;
   if (event.key === 'ArrowLeft') targetY = normalizeAngle(targetY - step);
   if (event.key === 'ArrowRight') targetY = normalizeAngle(targetY + step);
   if (event.key === 'ArrowUp') targetX = clamp(targetX - step, -62, 62);
   if (event.key === 'ArrowDown') targetX = clamp(targetX + step, -62, 62);
-  if (event.key === 'Home') { targetX = -8; targetY = 16; }
+  if (event.key === 'Home') { targetX = HOME_X; targetY = HOME_Y; }
 });
 
 // Portfolio grid + detail modal.
