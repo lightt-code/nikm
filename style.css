@@ -33,10 +33,8 @@ h1{font-size:clamp(72px,12vw,156px);line-height:.85;letter-spacing:-.075em;margi
 .money-stack:focus-visible{outline:1px dashed rgba(120,205,255,.6);outline-offset:24px}
 .mf{position:absolute;left:0;top:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;pointer-events:none;overflow:hidden}
 .mf-front{width:var(--w);height:var(--h);background:url(money-face.jpg) center/100% 100% #e6ecea;border-radius:2px;transform:translateZ(calc(var(--d) / 2));box-shadow:inset 0 0 0 1px rgba(0,0,0,.25),inset 0 0 22px rgba(255,255,255,.12)}
-.mf-front::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.22),transparent 34%,transparent 70%,rgba(0,0,0,.14))}
-.mf-back{width:var(--w);height:var(--h);transform:rotateY(180deg) translateZ(calc(var(--d) / 2));background:radial-gradient(ellipse at 50% 50%,#b7d6a2 0 22%,transparent 23%),repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 3px,transparent 3px 7px),linear-gradient(135deg,#84b36d,#5f9552 55%,#4d8444);box-shadow:inset 0 0 0 7px #8fbc79,inset 0 0 0 9px #4a7d41;border-radius:2px;font-family:Manrope,Arial,sans-serif;color:#2f5a2a}
-.mf-back b{position:absolute;font-size:34px;font-weight:800;top:16px;left:22px}.mf-back b+b{top:auto;left:auto;bottom:16px;right:22px}
-.mf-back i{position:absolute;left:51%;top:0;width:34px;height:100%;transform:translateX(-50%);background:linear-gradient(90deg,#2d6fb8,#5aa6ec 50%,#2d6fb8);opacity:.92}
+.mf-back{width:var(--w);height:var(--h);background:url(money-face.jpg) center/100% 100% #e6ecea;border-radius:2px;transform:rotateY(180deg) translateZ(calc(var(--d) / 2));box-shadow:inset 0 0 0 1px rgba(0,0,0,.25),inset 0 0 22px rgba(255,255,255,.12)}
+.mf-front::after,.mf-back::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(255,255,255,.22),transparent 34%,transparent 70%,rgba(0,0,0,.14))}
 /* paper edges: thin sheets stacked along the depth axis */
 .mf-left,.mf-right{width:var(--d);height:var(--h);background:repeating-linear-gradient(90deg,#f3efd9 0 2px,#cfd8bf 2px 3px,#ebe6cb 3px 5px,#e3ead2 5px 6px),linear-gradient(180deg,rgba(0,0,0,.18),transparent 25%,transparent 75%,rgba(0,0,0,.28));background-blend-mode:multiply}
 .mf-left{left:calc((var(--w) - var(--d)) / 2);transform:rotateY(-90deg) translateZ(calc(var(--w) / 2));filter:brightness(.82)}
